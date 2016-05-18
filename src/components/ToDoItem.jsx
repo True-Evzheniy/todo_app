@@ -1,5 +1,7 @@
 import React from 'react';
 
+require('./ToDoItem.scss');
+
 let ToDoItem = React.createClass({
   render: function() {
     return (

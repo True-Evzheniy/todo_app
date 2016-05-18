@@ -14,8 +14,8 @@ module.exports = {
   module: {
     loaders: [
       {
-        test: /\.css$/,
-        loader: "style-loader!css-loader!autoprefixer-loader",
+        test: /\.(css|scss)$/,
+        loader: "style-loader!css-loader!sass-loader",
         exclude: [/node_modules/, /public/]
       },
       {
