@@ -22,14 +22,16 @@ let ToDoList = React.createClass({
     return (
       <div>
         {
-          tasksArrayToRender.map(function(task) {
+          tasksArrayToRender.map((task)=> {
             return (
               <ToDoItem
                 text={task.text}
                 key={task.id}
+                id={task.id}
                 checked={task.checked}
                 handleTaskDelete={handleTaskDelete.bind(null, task)}
                 handleTaskChecked={handleTaskChecked.bind(null, task)}
+                handleEditText={this.props.handleEditText}
               />
             );
           })

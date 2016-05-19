@@ -48,6 +48,22 @@ let ToDoApp = React.createClass({
       tasks: newTasks
     });
   },
+  handleEditText: function(id, text){
+    debugger;
+    const newTasks = this.state.tasks.map((item)=>{
+      if(id === item.id) {
+        item.text = text;
+      }
+      return {
+        text: item.text,
+        id: item.id,
+        checked: item.checked
+      };
+    });
+    this.setState({
+      tasks: newTasks
+    });
+  },
   render: function() {
     return (
       <div>
@@ -56,7 +72,9 @@ let ToDoApp = React.createClass({
           tasks={this.state.tasks}
           filter={this.state.filter}
           handleTaskDelete={this.handleTaskDelete}
-          handleTaskChecked={this.handleTaskChecked}/>
+          handleTaskChecked={this.handleTaskChecked}
+          handleEditText={this.handleEditText}
+        />
         <ToDoFilter onFilterChecked={this.onFilterChecked} filter={this.state.filter} />
       </div>
     );
