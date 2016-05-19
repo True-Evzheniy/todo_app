@@ -1,5 +1,4 @@
 var webpack = require('webpack');
-var path = require('path');
 
 module.exports = {
   entry: "./src/main.js",
@@ -19,20 +18,8 @@ module.exports = {
         exclude: [/node_modules/, /public/]
       },
       {
-        test: /\.gif$/,
-        loader: "url-loader?limit=10000&mimetype=image/gif"
-      },
-      {
-        test: /\.jpg$/,
-        loader: "url-loader?limit=10000&mimetype=image/jpg"
-      },
-      {
-        test: /\.png$/,
-        loader: "url-loader?limit=10000&mimetype=image/png"
-      },
-      {
-        test: /\.svg/,
-        loader: "url-loader?limit=26000&mimetype=image/svg+xml"
+        test: /\.(gif|jpg|png|svg)$/,
+        loader: "url-loader?limit=10000"
       },
       {
         test: /\.(js|jsx)$/,
