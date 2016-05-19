@@ -2,7 +2,7 @@ import React from 'react';
 
 require('./ToDoItem.scss');
 
-let ToDoItem = React.createClass({
+const ToDoItem = React.createClass({
   render: function() {
     return (
       <div>
