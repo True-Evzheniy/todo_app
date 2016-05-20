@@ -1,6 +1,7 @@
 import React from 'react';
+import Category from './ToDoCategory';
 
-let ToDoFilter = React.createClass({
+const ToDoFilter = React.createClass({
   setCurrentFilter: function() {
     let filters = document.querySelectorAll('[name=todo-filter]');
     Array.prototype.forEach.call(filters, (item) => {
@@ -20,10 +21,17 @@ let ToDoFilter = React.createClass({
   },
   render: function() {
     return (
-      <div onChange={this.handleFilterChecked}>
-        <label><input type='radio' name='todo-filter' value='all' />Все</label>
-        <label><input type='radio' name='todo-filter' value='active' />Активные</label>
-        <label><input type='radio' name='todo-filter' value='compleate' />Выполненные</label>
+      <div>
+        <div>
+          {
+            
+          }
+        </div>
+        <div onChange={this.handleFilterChecked}>
+          <label><input type='radio' name='todo-filter' value='all' />Все</label>
+          <label><input type='radio' name='todo-filter' value='active' />Активные</label>
+          <label><input type='radio' name='todo-filter' value='compleate' />Выполненные</label>
+        </div>
       </div>
     );
   }

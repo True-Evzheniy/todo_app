@@ -11,9 +11,9 @@ const ToDoApp = React.createClass({
     return ({
       filter: 'all',
       tasks: [
-        {id: 1, text: 'купить хлеб', checked: true},
-        {id: 2, text: 'покрасить небо', checked: false},
-        {id: 3, text: 'съесть французских булок', checked: true}
+        {id: 1, text: 'купить хлеб', checked: true, categories: []},
+        {id: 2, text: 'покрасить небо', checked: false, categories: []},
+        {id: 3, text: 'съесть французских булок', checked: true, categories: []}
       ]
     });
   },
@@ -56,12 +56,46 @@ const ToDoApp = React.createClass({
       return {
         text: item.text,
         id: item.id,
-        checked: item.checked
+        checked: item.checked,
+        categories: item.categories
       };
     });
     this.setState({
       tasks: newTasks
     });
+  },
+  handleAddCategory: function (id, category) {
+    let isAdd = false;
+    const newTasks = this.state.tasks.map((item)=>{
+      if(id === item.id) {
+        if (!~item.categories.indexOf(category)){
+          item.categories.push(category);
+          isAdd = true;
+        }
+      }
+      return {
+        text: item.text,
+        id: item.id,
+        checked: item.checked,
+        categories: item.categories
+      };
+    });
+    let newRootCategories = this.getCategories(newTasks);
+    this.setState({
+      tasks: newTasks,
+      rootCategories: newRootCategories
+    });
+  },
+  getCategories: function(newTasks){
+    let newCategories = [];
+    newTasks.forEach((item)=>{
+      item.categories.forEach((subitem)=>{
+        if(!~newCategories.indexOf(subitem)) {
+          newCategories.push(subitem);
+        }
+      });
+    });
+    return newCategories;
   },
   render: function() {
     return (
@@ -73,6 +107,7 @@ const ToDoApp = React.createClass({
           handleTaskDelete={this.handleTaskDelete}
           handleTaskChecked={this.handleTaskChecked}
           handleEditText={this.handleEditText}
+          handleAddCategory={this.handleAddCategory}
         />
         <ToDoFilter onFilterChecked={this.onFilterChecked} filter={this.state.filter} />
       </div>

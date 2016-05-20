@@ -38,7 +38,8 @@ let ToDoEditor = React.createClass({
     let newTask = {
       id: Date.now(),
       text: this.state.text,
-      checked: false
+      checked: false,
+      categories: []
     };
     this.props.addNewTask(newTask);
     this.setState({

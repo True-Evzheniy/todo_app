@@ -32,6 +32,7 @@ let ToDoList = React.createClass({
                 handleTaskDelete={handleTaskDelete.bind(null, task)}
                 handleTaskChecked={handleTaskChecked.bind(null, task)}
                 handleEditText={this.props.handleEditText}
+                handleAddCategory={this.props.handleAddCategory}
               />
             );
           })
