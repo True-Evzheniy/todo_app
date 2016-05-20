@@ -14,7 +14,8 @@ const ToDoApp = React.createClass({
         {id: 1, text: 'купить хлеб', checked: true, categories: []},
         {id: 2, text: 'покрасить небо', checked: false, categories: []},
         {id: 3, text: 'съесть французских булок', checked: true, categories: []}
-      ]
+      ],
+      rootCategories: []
     });
   },
   onFilterChecked: function(filterName) {
@@ -109,7 +110,11 @@ const ToDoApp = React.createClass({
           handleEditText={this.handleEditText}
           handleAddCategory={this.handleAddCategory}
         />
-        <ToDoFilter onFilterChecked={this.onFilterChecked} filter={this.state.filter} />
+        <ToDoFilter
+          onFilterChecked={this.onFilterChecked}
+          filter={this.state.filter}
+          categories={this.state.rootCategories}
+        />
       </div>
     );
   },

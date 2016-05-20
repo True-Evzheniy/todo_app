@@ -1,5 +1,5 @@
 import React from 'react';
-import Category from './ToDoCategory';
+import ToDoCategory from './ToDoCategory';
 
 const ToDoFilter = React.createClass({
   setCurrentFilter: function() {
@@ -24,7 +24,14 @@ const ToDoFilter = React.createClass({
       <div>
         <div>
           {
-            
+            this.props.categories.map((item, i)=>{
+              return (
+                <ToDoCategory
+                  category={item}
+                  key={i}
+                />
+              );
+            })
           }
         </div>
         <div onChange={this.handleFilterChecked}>
