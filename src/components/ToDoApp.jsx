@@ -6,7 +6,7 @@ import ToDoList from './ToDoList';
 
 import ToDoFilter from './ToDoFilter';
 
-let ToDoApp = React.createClass({
+const ToDoApp = React.createClass({
   getInitialState: function() {
     return ({
       filter: 'all',
@@ -49,7 +49,6 @@ let ToDoApp = React.createClass({
     });
   },
   handleEditText: function(id, text){
-    debugger;
     const newTasks = this.state.tasks.map((item)=>{
       if(id === item.id) {
         item.text = text;

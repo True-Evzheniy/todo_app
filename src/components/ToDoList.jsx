@@ -38,6 +38,25 @@ let ToDoList = React.createClass({
         }
       </div>
     );
+  },
+  filtrationAnd: function(categories, filter){
+    if (categories.length < filter.length) return false;
+    let counter = 0;
+    categories.forEach((item)=>{
+      if (~filter.indexOf(item)) {
+        counter++;
+      }
+    });
+    return (counter === filter.length);
+  },
+  filtrationOr: function(categories, filter) {
+    let counter = 0;
+    categories.forEach((item)=>{
+      if(~filter.indexOf(item)){
+        counter++;
+      }
+    });
+    return !!counter;
   }
 });
 
