@@ -4,7 +4,7 @@ const ToDoCategory = React.createClass({
   render: function(){
     return (
       <div>
-        {this.props.category}
+        <label><input type="checkbox" value={this.props.category}/>{this.props.category}</label>
       </div>
     );
   }

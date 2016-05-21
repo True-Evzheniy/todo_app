@@ -33,8 +33,10 @@ const ToDoApp = React.createClass({
     let newTasks = this.state.tasks.filter(function(item) {
       return item.id !== taskId;
     });
+    let newRootCategories = this.getCategories(newTasks);
     this.setState({
-      tasks: newTasks
+      tasks: newTasks,
+      rootCategories: newRootCategories
     });
   },
   handleTaskChecked: function(task) {
@@ -121,18 +123,22 @@ const ToDoApp = React.createClass({
   componentDidMount: function() {
     let localTasks = JSON.parse(localStorage.getItem('tasks'));
     let localFilter = localStorage.getItem('filter');
+    let localRootCategories = JSON.parse(localStorage.getItem('rootCategories'));
     if(localTasks) {
       this.setState({
         tasks: localTasks,
-        filter: localFilter
+        filter: localFilter,
+        rootCategories: localRootCategories
       });
     }
   },
   _updateLocalStorage: function() {
     let localTasks = JSON.stringify(this.state.tasks);
     let localFilter = this.state.filter;
+    let localRootCategories = JSON.stringify(this.state.rootCategories);
     localStorage.setItem('tasks', localTasks);
     localStorage.setItem('filter', localFilter);
+    localStorage.setItem('rootCategories', localRootCategories);
   },
   componentDidUpdate: function() {
     this._updateLocalStorage();
