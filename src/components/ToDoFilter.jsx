@@ -25,10 +25,13 @@ const ToDoFilter = React.createClass({
         <div>
           {
             this.props.categories.map((item, i)=>{
+              let isChecked = !!~this.props.categoriesFilter.indexOf(item);
               return (
                 <ToDoCategory
                   category={item}
                   key={i}
+                  checked = {isChecked}
+                  handleCheckedCategory={this.props.handleCheckedCategory}
                 />
               );
             })

@@ -7,6 +7,18 @@ import ToDoList from './ToDoList';
 import ToDoFilter from './ToDoFilter';
 
 const ToDoApp = React.createClass({
+  handleCheckedCategory: function (category) {
+    let newCategoriesFilter = this.state.categoriesFilter.slice();
+    const filtersNumber = newCategoriesFilter.indexOf(category);
+    if(filtersNumber === -1) {
+      newCategoriesFilter.push(category);
+    } else {
+      newCategoriesFilter.splice(filtersNumber, 1);
+    }
+    this.setState({
+      categoriesFilter: newCategoriesFilter
+    });
+  },
   getInitialState: function() {
     return ({
       filter: 'all',
@@ -15,7 +27,8 @@ const ToDoApp = React.createClass({
         {id: 2, text: 'покрасить небо', checked: false, categories: []},
         {id: 3, text: 'съесть французских булок', checked: true, categories: []}
       ],
-      rootCategories: []
+      rootCategories: [],
+      categoriesFilter: []
     });
   },
   onFilterChecked: function(filterName) {
@@ -34,10 +47,25 @@ const ToDoApp = React.createClass({
       return item.id !== taskId;
     });
     let newRootCategories = this.getCategories(newTasks);
-    this.setState({
-      tasks: newTasks,
-      rootCategories: newRootCategories
-    });
+    let newCategoriesFilter;
+    if(this.state.rootCategories.length !== newRootCategories.length) {
+      newCategoriesFilter = this.state.categoriesFilter.slice();
+      for(let i = 0; i < newCategoriesFilter.length; i++) {
+        if(!~ newRootCategories.indexOf(newCategoriesFilter[i])) {
+          console.log(newCategoriesFilter.splice(i,1));
+          i--;
+        }
+      }
+      this.setState({
+        tasks: newTasks,
+        rootCategories: newRootCategories,
+        categoriesFilter: newCategoriesFilter
+      });
+    } else{
+      this.setState({
+        tasks: newTasks
+      });
+    }
   },
   handleTaskChecked: function(task) {
     let taskId = task.id;
@@ -113,9 +141,11 @@ const ToDoApp = React.createClass({
           handleAddCategory={this.handleAddCategory}
         />
         <ToDoFilter
+          categoriesFilter={this.state.categoriesFilter}
           onFilterChecked={this.onFilterChecked}
           filter={this.state.filter}
           categories={this.state.rootCategories}
+          handleCheckedCategory={this.handleCheckedCategory}
         />
       </div>
     );
@@ -124,11 +154,13 @@ const ToDoApp = React.createClass({
     let localTasks = JSON.parse(localStorage.getItem('tasks'));
     let localFilter = localStorage.getItem('filter');
     let localRootCategories = JSON.parse(localStorage.getItem('rootCategories'));
+    let localCategoriesFilter = JSON.parse(localStorage.getItem('categoriesFilter'));
     if(localTasks) {
       this.setState({
         tasks: localTasks,
         filter: localFilter,
-        rootCategories: localRootCategories
+        rootCategories: localRootCategories,
+        categoriesFilter: localCategoriesFilter
       });
     }
   },
@@ -136,9 +168,11 @@ const ToDoApp = React.createClass({
     let localTasks = JSON.stringify(this.state.tasks);
     let localFilter = this.state.filter;
     let localRootCategories = JSON.stringify(this.state.rootCategories);
+    let localCategoriesFilter = JSON.stringify(this.state.categoriesFilter);
     localStorage.setItem('tasks', localTasks);
     localStorage.setItem('filter', localFilter);
     localStorage.setItem('rootCategories', localRootCategories);
+    localStorage.setItem('categoriesFilter', localCategoriesFilter);
   },
   componentDidUpdate: function() {
     this._updateLocalStorage();
