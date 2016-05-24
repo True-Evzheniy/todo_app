@@ -19,9 +19,23 @@ const ToDoFilter = React.createClass({
   handleFilterChecked: function(event) {
     this.props.onFilterChecked(event.target.value);
   },
+  handleChangeTypeCategoriesFilter: function () {
+    this.props.handleChangeTypeCategoriesFilter();
+  },
   render: function() {
     return (
       <div>
+        <div>
+          <label>
+            <input type="checkbox"
+                   name="typeFilteringCategory"
+                   checked={this.props.useANDFilter}
+                   onChange={this.handleChangeTypeCategoriesFilter}
+                   hidden
+            />
+            {this.props.useANDFilter ? "Отображаются таски со ВСЕМИ выбранными категориями" : "Отображаются таски с Любой выбранной категорией" }
+          </label>
+        </div>
         <div>
           {
             this.props.categories.map((item, i)=>{

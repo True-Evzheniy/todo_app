@@ -17,6 +17,18 @@ let ToDoList = React.createClass({
         });
         break;
     }
+    
+    if(this.props.categoriesFilter.length) {
+      if(this.props.useANDFilter) {
+        tasksArrayToRender = tasksArrayToRender.filter((item)=>{
+          return this.filtrationAnd(item.categories, this.props.categoriesFilter);
+        });
+      } else {
+        tasksArrayToRender = tasksArrayToRender.filter((item)=>{
+          return this.filtrationOr(item.categories, this.props.categoriesFilter);
+        });
+      }
+    }
     let handleTaskDelete = this.props.handleTaskDelete;
     let handleTaskChecked = this.props.handleTaskChecked;
     return (

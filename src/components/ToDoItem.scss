@@ -2,4 +2,8 @@
   &__delete {
     cursor: pointer;
   }
+  
+  input[type ]:checked ~ input {
+    text-decoration: line-through;
+  }
 }
