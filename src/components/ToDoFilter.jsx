@@ -24,7 +24,7 @@ const ToDoFilter = React.createClass({
   },
   render: function() {
     return (
-      <div>
+      <div className="ToDoFilter">
         <div>
           <label>
             <input type="checkbox"
@@ -54,7 +54,7 @@ const ToDoFilter = React.createClass({
         <div onChange={this.handleFilterChecked}>
           <label><input type='radio' name='todo-filter' value='all' />Все</label>
           <label><input type='radio' name='todo-filter' value='active' />Активные</label>
-          <label><input type='radio' name='todo-filter' value='compleate' />Выполненные</label>
+          <label><input type='radio' name='todo-filter' value='complete' />Выполненные</label>
         </div>
       </div>
     );

@@ -2,11 +2,11 @@ import React from 'react';
 
 import ToDoItem from './ToDoItem';
 
-let ToDoList = React.createClass({
+const ToDoList = React.createClass({
   render: function() {
     let tasksArrayToRender = this.props.tasks.slice();
     switch(this.props.filter) {
-      case 'compleate':
+      case 'complete':
         tasksArrayToRender = tasksArrayToRender.filter(function(item){
           return item.checked;
         });
@@ -32,7 +32,7 @@ let ToDoList = React.createClass({
     let handleTaskDelete = this.props.handleTaskDelete;
     let handleTaskChecked = this.props.handleTaskChecked;
     return (
-      <div>
+      <div className="ToDoList">
         {
           tasksArrayToRender.map((task)=> {
             return (

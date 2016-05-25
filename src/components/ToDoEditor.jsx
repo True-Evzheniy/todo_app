@@ -8,34 +8,12 @@ let ToDoEditor = React.createClass({
     });
   },
   handleTextChange: function(event) {
-    if(!event.target.value) {
-      this.setState({
-        text: event.target.value,
-        hiddenBtn: true
-      });
-    }  else {
-      this.setState({
-        text: event.target.value,
-        hiddenBtn: false
-      });
-    }
-  },
-  handleInputFocus: function(){
-    if(this.state.text) {
-      this.setState({
-        hiddenBtn: false
-      });
-    }
-  },
-  handleInputBlur: function() {
-    if(!this.state.text) {
-      this.setState({
-        hiddenBtn: true
-      })
-    }
+    this.setState({
+      text: event.target.value
+    });
   },
   handleAddTask: function() {
-    let newTask = {
+    const newTask = {
       id: Date.now(),
       text: this.state.text,
       checked: false,
@@ -43,21 +21,18 @@ let ToDoEditor = React.createClass({
     };
     this.props.addNewTask(newTask);
     this.setState({
-      text: '',
-      hiddenBtn: true
+      text: ''
     });
   },
   render: function() {
     return (
-      <div>
+      <div className="ToDoEditor">
         <input
           type='text'
           value={this.state.text}
           onChange={this.handleTextChange}
-          onFocus={this.handleInputFocus}
-          onBlur={this.handleInputBlur}
         />
-        <button hidden={this.state.hiddenBtn} onClick={this.handleAddTask}>add</button>
+        <button disabled={!this.state.text} onClick={this.handleAddTask}>add</button>
       </div>
     );
   }

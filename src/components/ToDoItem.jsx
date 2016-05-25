@@ -24,8 +24,8 @@ const ToDoItem = React.createClass({
   },
   render: function() {
     return (
-      <div>
-        <input onChange={this.props.handleTaskChecked} type='checkbox' checked={this.props.checked} />
+      <div className="ToDoItem">
+        <input className="ToDoItem__checkbox" onChange={this.props.handleTaskChecked} type='checkbox' checked={this.props.checked} />
         <input onChange={this.handleTextEdit} type='text' value={this.props.text}/>
         <span className='ToDoItem__delete' onClick={this.props.handleTaskDelete}> x </span>
         <br/>

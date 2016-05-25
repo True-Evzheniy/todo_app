@@ -1,4 +1,5 @@
 import React from 'react';
+import './ToDoApp.scss';
 
 import ToDoEditor from './ToDoEditor';
 
@@ -36,11 +37,9 @@ const ToDoApp = React.createClass({
     this.setState({filter: filterName});
   },
   addNewTask: function(newTask) {
-    let newTasks = this.state.tasks.slice();
-    newTasks.unshift(newTask);
-    this.setState({
-      tasks: newTasks
-    });
+    let tasks = this.state.tasks.slice();
+    tasks.unshift(newTask);
+    this.setState({tasks});
   },
   handleTaskDelete: function(task) {
     let taskId = task.id;
@@ -137,7 +136,7 @@ const ToDoApp = React.createClass({
   },
   render: function() {
     return (
-      <div>
+      <div className="ToDoApp">
         <ToDoEditor addNewTask={this.addNewTask} />
         <ToDoList
           tasks={this.state.tasks}
